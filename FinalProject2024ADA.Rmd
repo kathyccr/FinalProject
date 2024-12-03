@@ -1,0 +1,587 @@
+---
+title: "ADA project"
+author: "Kathia Cardenas"
+date: "2024-11-24"
+output: word_document
+---
+
+# RQ: What is the association between adverse childhood experiences and depressive disorder in LGBTQ+ individuals, based on the 2021 BRFSS survey data?
+
+# Objectives: 
+1. Determine whether adverse childhood experiences are associated with the prevalence of depressive disorder in LGBTQ+ individuals.
+2. Identify which specific adverse childhood experiences — abuse, neglect, and household dysfunction — has the strongest association with depressive disorder in LGBTQ+ individuals.
+
+# BRFSS codebook:
+<https://www.cdc.gov/brfss/annual_data/annual_2023.html>
+
+# Variables desription:
+•	The dependent variable is depressive disorder
+- Variabe name: ADDEPEV3 
+- Label: (Ever told) you had a depressive disorder 
+- Measured: 1=Yes, 2=No, 7=Don’t know/Not Sure, 9=Refused
+
+• The independent variable is adverse childhood experiences, which is categorized by the CDC into three major dimensions: household challenges, abuse, and neglect. Household challenges are measured using six items that covers home environmental concerns. Abuse experience is assessed through five questions, and neglect is assessed using two factors. Variables are described as follows:
+
+a) Dysfunctional household 
+1) ACEDEPRS (Mental illness in the household)
+- Label: Live With Anyone Depressed, Mentally Ill, Or Suicidal?
+- Measured: 1=Yes, 2=No, 7=Don’t know/Not Sure, 9=Refused
+
+2) ACEDRINK (Alcohol abuse in the household)
+- Label:  Live With a Problem Drinker/Alcoholic?
+- Measured: 1=Yes, 2=No, 7=Don’t know/Not Sure, 9=Refused
+
+3) ACEDRUGS (Drugs abuse in the household)
+- Label: Live With Anyone Who Used Illegal Drugs or Abused Prescriptions?
+- Measured: 1=Yes, 2=No, 7=Don’t know/Not Sure, 9=Refused
+
+4) ACEPRISN (Incarcerated household member)
+- Label: Live With Anyone Who Served Time in Prison or Jail?
+- Measured: 1=Yes, 2=No, 7=Don’t know/Not Sure, 9=Refused
+
+5) ACEDIVRC (Parental separation) 
+- Label: Were Your Parents Divorced/Separated?
+- Measured: 1=Yes, 2=No, 8=Parents not married, 7=Don’t know/Not Sure, 9=Refused
+
+6) ACEPUNCH (Parental abuse)
+- Label: How Often Did Your Parents Beat Each Other Up? 
+- Measured: 1=Never, 2=Once,3=More than once, 7=Don’t know/Not Sure, 9=Refused
+
+b) Abuse 
+1) ACEHURT1 (Physical abuse)
+- Label: How Often Did A Parent Physically Hurt You In Any Way? (before age 18)
+- Measured: 1=never, 2=Once,3=More than once, 7=Don’t know/Not Sure, 9=Refused
+
+2) ACESWEAR (Verbal abuse)
+- Label: How Often Did A Parent Insult/Swear At You?  
+- Measured: 1=never, 2=Once,3=More than once, 7=Don’t know/Not Sure, 9=Refused
+
+3) ACETOUCH (Sexual abuse)
+- Label: How Often Did Anyone Ever Touch You Sexually?  
+- Measured: 1=never, 2=Once,3=More than once, 7=Don’t know/Not Sure, 9=Refused
+
+4) ACETTHEM (Sexual abuse)
+- Label: How Often Did Anyone Make You Touch Them Sexually?  
+- Measured: 1=never, 2=Once,3=More than once, 7=Don’t know/Not Sure, 9=Refused
+
+5)ACEHVSEX (Sexual abuse)
+- Label: How Often Did Anyone Ever Force You to Have Sex?  
+- Measured: 1=never, 2=Once,3=More than once, 7=Don’t know/Not Sure, 9=Refused
+
+c) Neglect
+1) ACEADNED (physical negligence)
+- Label: Did an adult make sure basic needs were met?
+- Measured: 1=Never, 2=A little of the time, 3=Some of the time, 4=Most of the time, 5=All of the time, 7=Don’t know/Not Sure, 9=Refused 
+
+2) ACEADSAF (emotional negligence)
+- Label: Did an adult make you feel safe and protected?
+- Measured: 1=Never, 2=A little of the time, 3=Some of the time, 4=Most of the time, 5=All of the time, 7=Don’t know/Not Sure, 9=Refused 
+
+
+c) Three variables about sexual orientation and gender identity are used to characterize the study population:
+
+1) SOMALE (sexual orientation for males)
+- Label:Which of the following best represents how you think of yourself? 
+- Measured: 1=Gay, 2=Straight, that is, not gay, 3=Bisexual, 4=Something else, 7=I do not know the answer, 9=Refused
+
+2) SOFEMALE (sexual orientation for females)
+- Label:Which of the following best represents how you think of yourself? 
+- Measured: 1=Lesbian or gay, 2=Straight, that is, not gay, 3=Bisexual, 4=Something else, 7=I do not know the answer, 9=Refused 
+
+3) TRNSGNDR 
+- Label: Do you consider yourself to be transgender? 
+- Measured: 1=Yes, Transgender, male-to-female, 2=Yes, Transgender, female to male, 3=Yes, Transgender, gender nonconforming, 4=No, 7=Don’t know/Not Sure, 9=Refused 
+
+
+d) Demographic variables
+1) _EDUCAG (Education level)
+- Label: Level of education completed 
+- Measured: 1=Did not graduate High School, 2=Graduated High School, 3=Attended College or Technical School, 4=Graduated from College or Technical School, 9=Don’t know/Not Sure/Refused
+
+2) _RACEGR3 (Race/ethnicity)
+- Label: Race/ethnicity category
+- Measured: 1=White only, Non-Hispanic, 2=Black only, Non-Hispanic, 3=Other race only, Non-Hispanic, 4=Multiracial, Non-Hispanic, 5=Hispanic, 9=Don’t know/Not Sure/Refused
+
+3) _AGE_G (Age)
+- Label: Age category
+- Measured: 1=Age 18 to 24, 2=Age 25 to 34, 3=Age 35 to 44, 4=Age 45 to 54, 5=Age 55 to 64, 6=Age 65 or older 
+
+4) MARITAL (Marital status)
+- Label: Are you (marital status) 
+- Measured: 1=Married, 2=Divorced, 3=Widowed, 4=Separated, 5=Never married, 6=A member of an unmarried couple, 9=Refused
+
+5) _INCOMG1 (Income)
+- Label: Income categories
+- Measured: 1=Less than $15,000, 2=$15,000 to < $25,000, 3=$25,000 to < $35,000, 4=$35,000 to < $50,000, 5=$50,000 to < $100,000, 6=$100,000 to < $200,000, 7=$200,000 or more, 9=Don’t know/Not sure/Missing
+
+6) EMPLOY1 (Employment status)
+- Label: Are you currently?
+- Measured: 1=Employed for wages, 2=Self-employed, 3=Out of work for 1 year or more, 4=Out of work for less than a year, 5=Homemaker, 6=Student, 7=Retired, 8=Unable to work, 9=Refused
+
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+pacman::p_load(haven, tidyverse, naniar, VIM, mice, lattice, table1, odds.n.ends, blorr, lmtest, car, broom, readr, jtools, mass, DiagrammeR)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+ADA <- read_xpt("C:/Users/Kath/Downloads/LLCP2023.XPT")
+```
+ 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+ADAclean0 <- ADA %>% 
+  select(ADDEPEV3, ACEDEPRS, ACEDRINK, ACEDRUGS, ACEPRISN, ACEDIVRC, ACEPUNCH, ACEHURT1, ACESWEAR, ACETOUCH,  ACETTHEM, ACEHVSEX, ACEADNED, ACEADSAF, SOMALE, SOFEMALE, TRNSGNDR, EMPLOY1, MARITAL, `_EDUCAG`, `_RACEGR3`, `_AGE_G`, `_INCOMG1`, `_STATE`) %>% 
+  mutate(STATE = recode_factor(`_STATE`,
+      `10` = "Delaware",
+      `13` = "Georgia",
+      `29` = "Missouri",
+      `32` = "Nevada",
+      `34` = "New Jersey",
+      `51` = "Virginia",
+      `44` = "Rhode Island",
+      .default = NA_character_ ) ) %>%  
+  drop_na(STATE)
+```
+ 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#Data cleaning 
+ADAclean1 <- ADAclean0 %>% 
+  select(ADDEPEV3, ACEDEPRS, ACEDRINK, ACEDRUGS, ACEPRISN, ACEDIVRC, ACEPUNCH, ACEHURT1, ACESWEAR, ACETOUCH,  ACETTHEM, ACEHVSEX, ACEADNED, ACEADSAF, SOMALE, SOFEMALE, TRNSGNDR, EMPLOY1, MARITAL, `_EDUCAG`, `_RACEGR3`, `_AGE_G`, `_INCOMG1`)%>% 
+  rename(EDUCA = `_EDUCAG`)%>% 
+  rename(RACE = `_RACEGR3`)%>% 
+  rename(AGE = `_AGE_G`)%>% 
+  rename(INCOME = `_INCOMG1`)%>%
+  
+# outcome depressive disorder
+  mutate(ADDEPEV3 = recode_factor(ADDEPEV3,
+                                  '1'= 'Yes', 
+                                  '2'= 'No',
+                                  '7' = NA_character_, 
+                                  '9' = NA_character_))%>% 
+  
+# exposure ACE - Dysfunctional household 
+  mutate(ACEDEPRS = recode_factor(ACEDEPRS,
+                                  '1'= 'Yes', 
+                                  '2'= 'No',
+                                  '7' = NA_character_, 
+                                  '9' = NA_character_))%>% 
+  mutate(ACEDRINK = recode_factor(ACEDRINK,
+                                  '1'= 'Yes', 
+                                  '2'= 'No',
+                                  '7' = NA_character_, 
+                                  '9' = NA_character_))%>% 
+  mutate(ACEDRUGS = recode_factor(ACEDRUGS,
+                                  '1'= 'Yes', 
+                                  '2'= 'No',
+                                  '7' = NA_character_, 
+                                  '9' = NA_character_))%>% 
+  mutate(ACEPRISN = recode_factor(ACEPRISN,
+                                  '1'= 'Yes', 
+                                  '2'= 'No',
+                                  '7' = NA_character_, 
+                                  '9' = NA_character_))%>% 
+  mutate(ACEDIVRC = case_when(
+    ACEDIVRC %in% c(1, 8) ~ "Yes",
+    ACEDIVRC == 2 ~ "No",
+    ACEDIVRC %in% c(7, 9) ~ NA_character_)) %>% 
+  mutate(ACEPUNCH = case_when(
+    ACEPUNCH %in% c(2, 3) ~ "Yes",
+    ACEPUNCH == 1 ~ "No",
+    ACEPUNCH %in% c(7, 9) ~ NA_character_)) %>% 
+  mutate(ACE_house = case_when(
+      ACEDEPRS == "Yes" | ACEDRINK == "Yes" | ACEDRUGS == "Yes" | ACEPRISN == "Yes" | 
+      ACEDIVRC == "Yes" | ACEPUNCH == "Yes" ~ "Yes",
+      ACEDEPRS == "No" & ACEDRINK == "No" & ACEDRUGS == "No" & ACEPRISN == "No" &
+      ACEDIVRC == "No" & ACEPUNCH == "No" ~ "No",
+      TRUE ~ NA_character_)) %>% 
+  
+# exposure ACE - Abuse  
+  mutate(ACEHURT1 = case_when(
+    ACEHURT1 %in% c(2, 3) ~ "Yes",
+    ACEHURT1 == 1 ~ "No",
+    ACEHURT1 %in% c(7, 9) ~ NA_character_)) %>%
+  mutate(ACESWEAR = case_when(
+    ACESWEAR %in% c(2, 3) ~ "Yes",
+    ACESWEAR == 1 ~ "No",
+    ACESWEAR %in% c(7, 9) ~ NA_character_)) %>%
+  mutate(ACETOUCH = case_when(
+    ACETOUCH %in% c(2, 3) ~ "Yes",
+    ACETOUCH == 1 ~ "No",
+    ACETOUCH %in% c(7, 9) ~ NA_character_)) %>%
+  mutate(ACETTHEM = case_when(
+    ACETTHEM %in% c(2, 3) ~ "Yes",
+    ACETTHEM == 1 ~ "No",
+    ACETTHEM %in% c(7, 9) ~ NA_character_)) %>%
+   mutate(ACEHVSEX = case_when(
+    ACEHVSEX %in% c(2, 3) ~ "Yes",
+    ACEHVSEX == 1 ~ "No",
+    ACEHVSEX %in% c(7, 9) ~ NA_character_)) %>%
+  mutate(ACE_abuse = case_when(
+    if_any(c(ACEHURT1, ACESWEAR, ACETOUCH, ACETTHEM, ACEHVSEX), ~ . == "Yes") ~ "Yes",
+    if_all(c(ACEHURT1, ACESWEAR, ACETOUCH, ACETTHEM, ACEHVSEX), ~ . == "No") ~ "No",
+    TRUE ~ NA_character_)) %>%
+  
+# exposure ACE - Neglect 
+ mutate(ACEADNED = case_when(
+    ACEADNED %in% c(1, 2, 3) ~ "Yes",
+    ACEADNED %in% c(4, 5) ~ "No",
+    ACEADNED %in% c(7, 9) ~ NA_character_))%>%
+ mutate(ACEADSAF = case_when(
+    ACEADSAF %in% c(1, 2, 3) ~ "Yes",
+    ACEADSAF %in% c(4, 5) ~ "No",
+    ACEADSAF %in% c(7, 9) ~ NA_character_))%>%
+  mutate(ACE_neglect = case_when(
+    if_any(c(ACEADNED, ACEADSAF), ~ . == "Yes") ~ "Yes",
+    if_all(c(ACEADNED, ACEADSAF), ~ . == "No") ~ "No",
+    TRUE ~ NA_character_)) %>%
+  
+# Demographic variables
+ mutate(EDUCA = case_when(
+    EDUCA == 1 ~ "Less than High School",
+    EDUCA %in% c(2, 3) ~ "High school",
+    EDUCA == c(4) ~ "College",
+    EDUCA == 9 ~ NA_character_))%>% 
+ mutate(RACE = recode_factor(RACE,
+                             
+                                  '1'= 'White', 
+                                  '2'= 'Black', 
+                                  '3'= 'Other race',
+                                  '4'= 'Multiracial',
+                                  '5'= 'Hispanic',
+                             '9' = NA_character_))%>% 
+  mutate(AGE = recode_factor(AGE,
+                                  '1'= '18-24', 
+                                  '2'= '25-34', 
+                                  '3'= '35-44',
+                                  '4'= '45-54',
+                                  '5'= '55-64',
+                                  '6'= '65+'))%>%
+  mutate(MARITAL = case_when(
+    MARITAL %in% c(1, 6) ~ "Married or coupled",
+    MARITAL %in% c(2, 3, 4) ~ "Divorced, widowed, separated",
+    MARITAL == 5 ~ "Single",
+    MARITAL == 9 ~ NA_character_))%>% 
+  mutate(INCOME  = case_when(
+    INCOME %in% c(1, 2, 3, 4) ~ "≤$50,000",
+    INCOME == 5 ~ "$50,000 to < $100,000",
+    INCOME %in% c(6,7) ~ "≥$100,000",
+    INCOME == 9 ~ NA_character_)) %>% 
+  mutate(EMPLOY1 = case_when(
+    EMPLOY1 %in% c(1, 2) ~ "Employed",
+    EMPLOY1 %in% c(3, 4, 8) ~ "Unemployed",
+    EMPLOY1 %in% c(5, 6, 7) ~ "Homemaker/retired",
+    EMPLOY1 %in% c(9) ~ NA_character_)) %>% 
+  
+# Study population
+  mutate(SOMALE  = case_when(
+     SOMALE %in% c(1, 3, 4, 7) ~ "LGBTQ male",
+     SOMALE == 2 ~ "Straight male",
+     SOMALE %in% c(9) ~ NA_character_)) %>%
+  mutate(SOFEMALE  = case_when(
+     SOFEMALE %in% c(1, 3, 4, 7) ~ "LGBTQ female",
+     SOFEMALE == 2 ~ "Straight female",
+     SOFEMALE %in% c(9) ~ NA_character_)) %>%
+   mutate(TRNSGNDR  = case_when(
+    TRNSGNDR %in% c(1, 2, 3) ~ "Transgender",
+    TRNSGNDR  == 4 ~ "Cisgender",
+    TRNSGNDR %in% c(7, 9) ~ NA_character_))
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Gender identity variable
+ADAclean2 <- ADAclean1 %>%  
+  mutate(
+     Gender_Identity = case_when(
+      ((SOMALE == "Straight male" | SOFEMALE == "Straight female") & TRNSGNDR == "Transgender") ~ " Transgender",
+      SOMALE == "LGBTQ male" & TRNSGNDR == "Cisgender" ~ "Cisgender male",
+      SOFEMALE  == "LGBTQ female" & TRNSGNDR == "Cisgender" ~ "Cisgender female",
+      TRNSGNDR == "Transgender" ~ "Transgender",
+      TRUE ~ NA_character_)) %>% 
+    drop_na(Gender_Identity)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# combine all transgender in one group
+ADAclean2 <- ADAclean2 %>%
+  mutate(
+    Gender_Identity = case_when(
+      TRNSGNDR == "Transgender" ~ "Transgender",
+      SOMALE == "LGBTQ male" & TRNSGNDR == "Cisgender" ~ "Cisgender male",
+      SOFEMALE == "LGBTQ female" & TRNSGNDR == "Cisgender" ~ "Cisgender female",
+      TRUE ~ NA_character_)) 
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Combine all dimensions of ACE in one group
+ADAclean3 <- ADAclean2 %>% 
+  select(Gender_Identity, ADDEPEV3, ACE_house, ACE_abuse, ACE_neglect, EDUCA, AGE, RACE, MARITAL, INCOME, EMPLOY1) %>% 
+   mutate(ACE_any = case_when(
+      ACE_abuse == "Yes" | ACE_house == "Yes" | ACE_neglect == "Yes"  ~ "Yes",
+      ACE_abuse == "No" & ACE_house == "No" & ACE_neglect == "No" ~ "No",
+      TRUE ~ NA_character_))
+```
+
+```{r, iecho=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# NUMBER OF MISSING VALUES 
+sum(is.na(ADAclean2$ADDEPEV3)) #22 
+sum(is.na(ADAclean2$ACE_house)) #490 
+sum(is.na(ADAclean2$ACE_abuse)) #514
+sum(is.na(ADAclean2$ACE_neglect)) #503
+sum(is.na(ADAclean2$ECUCA)) #0
+sum(is.na(ADAclean2$AGE)) #0
+sum(is.na(ADAclean2$RACE)) #88
+sum(is.na(ADAclean2$MARITAL)) #42
+sum(is.na(ADAclean2$INCOME)) #696
+sum(is.na(ADAclean2$EMPLO1)) #0
+sum(is.na(ADAclean2$SOMALE)) #1983
+sum(is.na(ADAclean2$SOFEMALE)) #1316
+sum(is.na(ADAclean2$TRNSGNDR)) #0
+
+# Drop Na's
+ADA_table1 <- ADAclean3 %>% 
+  drop_na()
+```
+
+```{r}
+ADA_table1 <- ADA_table1 %>% 
+  mutate(RACE = case_when(
+    RACE == 'White' ~ 'White', 
+    RACE == 'Black' ~ 'Black', 
+    RACE == 'Hispanic' ~ 'Hispanic', 
+    RACE %in% c('Other race', 'Multiracial') ~ 'Other race'))
+```
+
+```{r}
+#Table 1 of descriptive statistics
+table1(~ ACE_any + Gender_Identity + AGE + RACE + MARITAL + EDUCA + INCOME + EMPLOY1 | ADDEPEV3, data = ADA_table1, overall = "Total",
+       caption = "Table 1. Demographic characteristics of study population stratified by presence of Depressive Disorder",
+       footnote = "Data source: https://www.cdc.gov/brfss/annual_data/annual_2023.html")
+```
+
+```{r}
+table1(~ ACE_any + ACE_house + ACE_abuse + ACE_neglect | ADDEPEV3, data = ADA_table1, overall = "Total",
+       caption = "Table 2. Frecuency of ACEs' major dimentions stratified by presence of Depressive disorder",
+       footnote = "Data source: https://www.cdc.gov/brfss/annual_data/annual_2021.html")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#Recode variables as 0 (No) and 1 (Yes)
+ADA_test <- ADA_table1 %>%
+    mutate(
+    ADDEPEV3 = ifelse(ADDEPEV3 == "Yes", 1, 0),
+    ACE_any = ifelse(ACE_any == "Yes", 1, 0),
+    ACE_house = ifelse(ACE_house == "Yes", 1, 0),
+    ACE_abuse = ifelse(ACE_abuse == "Yes", 1, 0),
+    ACE_neglect = ifelse(ACE_neglect == "Yes", 1, 0))
+
+ADA_test$INCOME <- as.factor(ADA_test$INCOME)
+ADA_test$INCOME <- relevel(ADA_test$INCOME, ref = "≤$50,000")
+ADA_test$EDUCA <- as.factor(ADA_test$EDUCA)
+ADA_test$EDUCA <- relevel(ADA_test$EDUCA, ref = "Less than High School")
+ADA_test$MARITAL <- as.factor(ADA_test$MARITAL)
+ADA_test$MARITAL <- relevel(ADA_test$MARITAL, ref = "Married or coupled")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#Logistic regression
+model0 <- glm(ADDEPEV3 ~ ACE_any, data=ADA_test, family="binomial")
+summary(model0) # log odds
+odds.n.ends(model0) # ORs and CIs
+
+#Interpretation: OR 4.44 (3.37, 5.96)
+# There is a positive association suggests that experiencing any ACEs increases the likelihood of a depressive disorder diagnosis in LGBTQ population.
+# Without adjusting for any other variables, Those who have experienced any adverse childhood experiences have 4.44 times the odds of reporting a depressive disorder, compared to those with no ACEs.
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Adjusting for confounders
+model1 <- glm(ADDEPEV3 ~ ACE_any + Gender_Identity + AGE + RACE + INCOME + EDUCA + MARITAL + EMPLOY1, data=ADA_test, family="binomial")
+ summary(model1) # log odds
+odds.n.ends(model1) # ORs and CIs
+
+#Interpretation: 3.55 (2.63, 4.85) 
+# After adjusting for confounders,  those who have experienced any adverse childhood experiences have 3.44 times the odds of reporting a depressive disorder compared to those who have not experienced any ACE.
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#Dysfunctional household 
+model2 <- glm(ADDEPEV3 ~ ACE_house, data=ADA_test, family="binomial")
+summary(model2) # log odds
+odds.n.ends(model2) # ORs and CIs
+
+#  3.77, 3.06 - 4.68
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#Abuse 
+model3 <- glm(ADDEPEV3 ~ ACE_abuse, data=ADA_test, family="binomial")
+summary(model3) # log odds
+odds.n.ends(model3) # ORs and CIs
+
+# OR 3.50,  2.86 - 4.30
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#Neglect 
+model4 <- glm(ADDEPEV3 ~ ACE_neglect, data=ADA_test, family="binomial")
+summary(model4) # log odds
+odds.n.ends(model4) # ORs and CIs
+
+# OR 2.14, 1.75 - 2.62
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Logistic model adjusting for other ACEs and confounders
+modelgp <- glm(ADDEPEV3 ~ ACE_house + ACE_abuse + ACE_neglect + Gender_Identity + AGE + RACE + INCOME + EDUCA + MARITAL + EMPLOY1, data=ADA_test, family="binomial")
+summary(modelgp) # log odds
+odds.n.ends(modelgp) # ORs and CIs
+
+# ACE_house OR 2.121 (1.70- 2.84)
+# Individuals with household dysfunction have 2.24 times higher odds of depressive disorder compared to those without such dysfunction.
+
+# ACE_abuse OR 2.05 (1.62 - 2.60)
+# Experiencing abuse is associated with about twice the odds of depressive disorder, indicating a strong association between abuse and depression.
+
+# ACE_neglect is not statistically significant OR 1.25, 0.97 - 1.58
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Multicollinearity assumption using VIF
+vif(model1)
+vif(modelgp)
+
+#Interpretation: The VIF values are well below 5, which is a common threshold for concern. None of the variables are indicating a problem with multicollinearity.
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#Influential cases using Cook's distance. 
+cooks_dist <- cooks.distance(model1)
+influential_points <- which(cooks_dist > (4 / nrow(ADA_table1)))
+influential_points
+
+plot(model1, which = 4, id.n = 3, col="red") 
+abline(h=1, col="red", lty=2)  
+
+model1.data <- augment(model1) %>%  
+  mutate(index = 1:n()) 
+
+head(model1.data)
+
+cuttoff <- 1 
+ADA_in <- model1.data %>% # excludes observations
+  filter(.cooksd < cuttoff)
+
+nrow(ADA_in)/nrow(ADA_table1) # check percent kept
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Calculate Cook's distance
+cooks_dist <- cooks.distance(model1)
+
+# Identify influential points
+influential_points <- which(cooks_dist > (4 / nrow(ADA_test)))
+influential_points
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#Lets use model1 and modelgp for model fit assessment 
+
+# Various pseudo R squares, log likelihood, deviance, AIC, BIC
+blr_model_fit_stats(model1)
+blr_test_hosmer_lemeshow(model1)
+# Log-Lik: A better model fit is one with a higher Log-Lik.
+# Hosmer lemeshow goodness of fit test: a non-significant p value (p=0.11) indicates a good fit
+
+blr_model_fit_stats(modelgp)
+blr_test_hosmer_lemeshow(modelgp)
+# Hosmer lemeshow goodness of fit test: a non-significant p value (p=0.44) indicates a good fit
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Perform the likelihood ratio test
+anova(model0, model1, test = "Chisq")
+
+# Perform the likelihood ratio test
+lrtest(model1, model0)
+
+# p-value < 0.05, reject the null hypothesis, indicating that the predictors collectively improve model fit.
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Figure 1. Information on how we arrived at the analytic dataset from the original raw data/description of how many observations were excluded.
+
+grViz("
+    digraph process_flow {
+    node [shape = box, style = filled, color = black, fontname = Helvetica, fontsize = 12, fillcolor = white]
+    edge[color = black,arrowhead=vee]
+    A [label = 'BRFSS 2023 initial survey responses\nn = 433,323']
+    B [label = 'Select the states where the SOGI and ACE modules were asked']
+    C [label = 'Number of observations left = 44,468']
+    D [label = 'Number of observations left = 3,299']
+    E [label = 'Apply inclusion and exclusion criteria for study population']
+    F [label = 'Final Sample Size\nn = 2,142']
+    G [label = 'Remove observations with incomplete data']
+
+blank1[label = '', width = 0.01, height = 0.01]   
+A -> blank1[dir=none];
+blank1 -> B[dir=back, minlen = 3];
+blank1 -> C
+ {{ rank = same; blank1 B}}
+
+blank2[label = '', width = 0.01, height = 0.01]
+C -> blank2[dir=none];
+blank2 -> D [minlen=1];
+blank2 -> E [dir=back, minlen = 3]
+{{ rank = same; blank2 E}}
+
+blank3[label = '', width = 0.01, height = 0.01]
+D -> blank3[dir=none];
+blank3 -> F [minlen=1];
+blank3 -> G [dir=back, minlen = 3]
+{{ rank = same; blank3 G}}
+  
+  }
+")
+    
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Missing data
+ADAmissing <- ADAclean1 %>%  
+     mutate(ACE_any = case_when(
+      ACE_abuse == "Yes" | ACE_house == "Yes" | ACE_neglect == "Yes"  ~ "Yes",
+      ACE_abuse == "No" & ACE_house == "No" & ACE_neglect == "No" ~ "No",
+      TRUE ~ NA_character_)) %>% 
+  mutate(
+    Gender_Identity = case_when(
+      ((SOMALE == "Straight male" | SOFEMALE == "Straight female") & TRNSGNDR == "Transgender") ~ "Transgender",
+      SOMALE == "LGBTQ male" & TRNSGNDR == "Cisgender" ~ "Cisgender male",
+      SOFEMALE == "LGBTQ female" & TRNSGNDR == "Cisgender" ~ "Cisgender female",
+      TRNSGNDR == "Transgender" ~ "Transgender",
+      ((SOMALE == "Straight male" | SOFEMALE == "Straight female") & TRNSGNDR == "Cisgender") ~ "Straight",  # Se cierra el paréntesis aquí
+      TRUE ~ NA_character_
+    )
+  )
+
+ADAmissing <- ADAmissing %>%  
+select(ADDEPEV3, SOMALE, SOFEMALE, TRNSGNDR, ACE_any) 
+```
+
+```{r, iecho=FALSE, message=FALSE, warning=FALSE, results='hide'}
+library(VIM)
+aggr(ADAmissing, col=c("navyblue", "yellow"), numbers=TRUE, sortVars=TRUE, labels=names(ADAmissing), cex.axis=.7, gap=3, ylab=c("Missing data", "Pattern"))
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+md.pattern(ADAmissing, rotate.names=TRUE)
+
+md.pairs(ADAmissing)
+# rr: 34571 obs have values for Depression and ACE,  15295 obs have values for both SOMALE and ACE, 18828 obs have values for both SOFEMALE and ACE, 34302 have values for both TRNSGNDR and ACE.
+
+```
+
